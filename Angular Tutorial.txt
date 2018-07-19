@@ -1053,3 +1053,4 @@ app.compnent.html
 <title-conversion></title-conversion>
 <favorite [is-favorite]="post.isFavorite" (changed)="isFavoriteChanged($event)"></favorite>
 
+%%%%%%%%%%%% My TEST %%%%%%%%%%%%%%%
