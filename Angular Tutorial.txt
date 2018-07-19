@@ -1,3 +1,16 @@
+######### Angular cli instalation ##############################
+################### Angular application creating cli commands #######################
+1. node --version
+2. npm -v -- to check npm version
+3. npm install -g @angular/cli --- to install angular cli
+4. ng --version -- to check angular version
+5. ng new first-angular -- to create new angular project first-angular
+5. ng g c author1 -- command to create component author1.
+6. ng -g s selectro1 -- command to create selector1
+7. npm install bootstrap --save to install bootstrap and save it in our current project. we can check this by going to package.json and dependencies.
+
+
+
 -------------- Angular Tutorial ----------------------
 1. Each website is divided in to multiple modules.
 2. Each module contains components which are the basic building blocks.
