@@ -1,0 +1,1055 @@
+-------------- Angular Tutorial ----------------------
+1. Each website is divided in to multiple modules.
+2. Each module contains components which are the basic building blocks.
+3. To create a new angular project we need to have angular cli
+   ng new  AngularTestingProject --- will create a new folder with AngularTestingProject will all angular components
+   shift+cntrl+p in visual studio and add code to the path
+   in the folder type code . and it will open visul studio for the current angular project 
+4. To start the website we have to run command
+   ng server 
+   
+----------- Components --------------------------------------
+1. Angular uses components to divide and build websites in order to use components
+we need to do the following in angular.
+2. First we need to create component.
+3. Register the component
+4. Add and element to the html markup.
+
+Stpe 1: Setps to create components
+---------------------------------------------------------------
+1. Go to apps folder where app module is there and create a new file with name.component.ts(eg: courses.component.ts)
+2. Open file courses.component.ts and add following code.
+	import {Component} from '@angular/core';
+	
+	// component is a decorator to use this decorator we have to declare a decorator fuction
+	@Component ({
+		selector: 'courses', // Selector is the new html markup that we use to render the just like <h1> etc..
+		template: '<h1>Welcome to angular tutorial<h1>' // since it is single html code we have used html if we have lots of html then we have to templateUrl;
+	)}
+	
+	export class CoursesComponent(){
+	}
+	
+
+2. We can use angular cli to generate a new component and register it to our module app by using below command.
+	ng g c courses -- to create a new c for component and g for globally.
+	
+	
+Step 2: Registering the component with the module
+--------------------------------------------
+1. In this example we have only one module that is app module to we will be editing app.module.
+    import { BrowserModule } from '@angular/platform-browser';
+	import { NgModule } from '@angular/core';
+	
+	import { AppComponent } from './app.component';
+	import { CoursesComponent } from './courses/courses.component'; // We have to add the import it as it our courses component class name.
+	
+	@NgModule({
+	declarations: [  // In declarations we declare all the components that we plan to use in our module. In this example we are using CoursesComponent
+		AppComponent,
+		CoursesComponent // CoursesComponent is the class that we have used in apps/courses.components.ts file 
+	],
+	imports: [
+		BrowserModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
+	})
+	export class AppModule { } // AppModule is a class and it is using NgModule as a decorator.
+
+Step 3: Using our slector component to html page
+----------------------------------------------------------
+1. We have created a new html tag called courses where ever this courses html element is used it will use html that we provided.
+2. In this example app.component.html is the web page where all the html markup is present and it will is displaying Angular welcome page
+	File app.component.html has following html
+	-------------------------------------------
+	<!--The content below is only a placeholder and can be replaced.-->
+	<div style="text-align:center">
+	<h1>
+		Welcome to {{ title }}!
+	</h1>
+	<img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+	</div>
+	<h2>Here are some links to help you start: </h2>
+	<ul>
+	<li>
+		<h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+	</li>
+	<li>
+		<h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
+	</li>
+	<li>
+		<h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+	</li>
+	</ul>
+	
+3. Next I am going to add the our new html element courses which will display the html markup that we have given in templateUrl file:
+	<!--The content below is only a placeholder and can be replaced.-->
+	<div style="text-align:center">
+	<h1>
+		Welcome to {{ title }}!
+	</h1>
+	<img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+	</div>
+	<h2>Here are some links to help you start: </h2>
+	<ul>
+	<li>
+		<h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+	</li>
+	<li>
+		<h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
+	</li>
+	<li>
+		<h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+	</li>
+	</ul>
+	
+	<courses></courses>
+	
+####### Changes in courses code as per angular tutorail #######################################
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "This is angular tutorial";
+  constructor() { }
+  
+  ngOnInit() {
+  }
+
+}
+
+Directive
+------- 
+1. Directive are used to manuplate the DOM elements
+2. when ever we are changing the something in DOM we have to prefix it with *. Here in this example we are using *ngFor
+3. In courses.components.html we have ue the below coded to change get the list of courses in the array delcared in coursesCompnents class
+	<h1>{{ getTitle() }}</h1>
+	<ul>
+	<li *ngFor=" let course of courses">
+		{{ course }}
+	</li>
+	</ul>
+	
+Service
+--------------------
+Serivce is a separate class where wirte the code for http end points so that it can be reused anywhere we want.
+1. To use service we have to create a file in app folder with naming convention name.service.ts(eg. courses.service.ts).
+2. courses.service.ts file will have below code.
+	export class CoursesService  {
+		getCourses() {
+			return ["course1", "course2", "course3" ];
+		}
+	}
+3. We will be creating a new object service to get the data from the service file. courses.component.ts file will have following data.
+	import { CoursesService } from './courses.service';
+	import { Component, OnInit } from '@angular/core';
+		
+	@Component({
+	selector: 'courses',
+	templateUrl: './courses.component.html',
+	styleUrls: ['./courses.component.css']
+	})
+	export class CoursesComponent implements OnInit {
+	title = "List of Courses";
+	courses;
+	constructor() {
+	let service = new CoursesService();
+	this.courses = service.getCourses();
+	}
+	ngOnInit() {
+	}
+	
+	}
+
+
+Dependency Injection
+--------------------------------------
+Dependency injection is nothing but telling class constructor that it needs to inject a service in to its constructor. we do that by adding parament ( service: CoursesService)
+and we have to regirster in our app.module.ts and go to providers and add our service name there.
+EG: 
+courses.components. ts
+--------------------------------
+	import { CoursesService } from './courses.service';
+	import { Component, OnInit } from '@angular/core';
+	
+	
+	
+	@Component({
+	selector: 'courses',
+	templateUrl: './courses.component.html',
+	styleUrls: ['./courses.component.css']
+	})
+	export class CoursesComponent implements OnInit {
+	title = "List of Courses";
+	courses;
+	constructor(serivce:CoursesService ) {
+	this.courses = service.getCourses();
+	}
+	ngOnInit() {
+	}
+	
+	}
+	
+To create a service using cli we have to use following command.
+ng generate service email (in this email is the example)
+	
+app.module.ts
+----------------------
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CoursesService } from './courses/courses.service';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CoursesComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [
+    CoursesService // we have to add our serivce in providers array.
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+String interpolation and [] interpolation
+-----------------------------------------------------
+1. We can use string interpolation where we have text of DOM element like h1,h2, div, p etc..
+ EG:
+ course.compnent.ts
+ -------------------------------
+	import { CoursesService } from '../courses.service';
+	import { Component, OnInit } from '@angular/core';
+	
+	
+	
+	@Component({
+	selector: 'courses',
+	templateUrl: './courses.component.html',
+	styleUrls: ['./courses.component.css']
+	})
+	export class CoursesComponent implements OnInit {
+	title = "List of Courses";
+	imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+	ngOnInit() {
+	}
+	
+	}
+	
+
+course.component.html
+-------------------------------------
+1.listst method is to use "" add string a
+<h1>{{ title }}</h1>
+
+Attribute binding.
+---------------------------
+In angular we are changing the attribute property DOM elment. html is code language for DOM reprenstation. all html elements will create a DOM in the memeroy. Not all the html elements 
+have its DOM reprenstation. Some of them may not so in that we need to use [attr.element]
+as show below.
+
+courses.component.ts
+==================================
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  colSpan = 2;
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+course.compnent.html
+============================
+<h1>{{ title }}</h1>
+ <img src ="imageUrl" />
+<table>
+    <tr>
+        <td [attr.colspan]="colSpan">row 1</td>
+    </tr>
+</table>
+
+<img src="{{ imageUrl }}" />
+
+2nd method is use []
+<h1>{{ title }}</h1>
+<img [src]="imageUrl" />
+
+installing bootstrap
+------------------------------------------
+In termial window we have to go the folder where we are running the current project and run below command --save 
+ng insall bootstrap --save ( --save option will add bootstrap to our package.json file )
+next we have serach for styel.css by pressing cnt+p and searching style.css)
+in style.css we can directly import the bootstrap 
+style.css
+-------------------------------------------
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+body { padding: 20px; }
+
+courses.compnent.html
+----------------------------------
+<h1>{{ title }}</h1>
+
+<button class="btn btn-primary">Save</button>
+
+
+class Binding
+---------------------------------
+When we have to use class binding we use [] and in the that we have class. to refer to its field.
+
+<h1>{{ title }}</h1>
+
+<button class="btn btn-primary" [class.active]="isActive">Save</button>
+	
+style binding
+-------------------------------------------------
+For style binding we have to use [] to change the style dynamically 
+
+EG: courses.component.html
+<h1>{{ title }}</h1>
+
+<button [style.backgroundColor]= "isActive ? 'blue' : 'red' ">Save</button>
+
+Event Binding
+-----------------------------------------
+To use event binding we have to use () instead of [] and we can assign any method to it. 
+
+EG: courses.component.html
+
+<h1>{{ title }}</h1>
+
+<button (click)="onSave()">Save</button>
+
+courses.component.ts
+===============================
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  isActive = true;
+  onSave(){
+    console.log(" you have clicked!!");
+  }
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+  Eventes are trigged when some action is performed on our page we can pass the event like mouseMove, mouseClick, keyUp,Keydown and we can get the list in w3schools.com/angular/angular-cli/wiki
+
+Here in this example we are passing the $event which will hold the event that has been triggred.
+
+EG: courses.component.html
+
+<h1>{{ title }}</h1>
+
+<button (click)="onSave($event)">Save</button>
+
+courses.component.ts
+============================================
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  isActive = true;
+  onSave($event){
+    console.log(" you have clicked!!", $event);
+  }
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+Event Bubbling
+---------------------------------
+Event bubbling is nothing but when we do an action on one element all its corresponding elements will also carry that event
+EG: courses.component.html
+
+<h1>{{ title }}</h1>
+
+<div (click)= "onDivClicked()">   <!-- Here we have added div so when we click on button div click event will also be executed>
+    <button (click)="onSave($event)">Save</button>
+</div>
+
+courses.component.ts
+============================================
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+We can stop the event bubbling by using stopPropogation() function in the onSave() method.
+
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  isActive = true;
+  onDivClicked() {
+    console.log("Div element was clicked!!!");
+  }
+  onSave($event){
+    $event.stopPropogation();
+    
+    console.log(" you have clicked!!", $event);
+  }
+  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+  
+  
+  
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  isActive = true;
+  onDivClicked() {
+    console.log("Div element was clicked!!!");
+  }
+  onSave($event){
+    console.log(" you have clicked!!", $event);
+  }
+  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+
+Event Filtering
+----------------------------------------------------
+WE can do event filter 
+
+<h1>{{ title }}</h1>
+
+<input (keyup)="onKeyUp($event)" />
+
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  onKeyUp($event){
+    if ($event.keyCode === 13 ) console.log("you have pressed the ENTER key!!");
+  }  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+In Angular we have filter to handel events like shown below
+
+.html
+---------------
+<h1>{{ title }}</h1>
+
+<input (keyup.enter)="onKeyUp()" />
+
+.ts
+-----------------
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  title = "List of Courses";
+  onKeyUp() {
+    console.log("you have pressed the ENTER key!!");
+  }  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+Template Variables
+------------------------------------------------------
+We can create template variables in pass the values to the handel the events.
+
+.html
+-------------------------
+<h1>{{ title }}</h1>
+
+<input #email (keyup.enter)="onKeyUp(email.value)" /> // here we are using #email as a variable and keyup.enter to get value when enter key is pressed.
+
+.ts
+------------------------
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  email = 'me@example.com';
+  onKeyUp(email) {
+    console.log(email);
+  }  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+
+Two Way Binding
+--------------------------------------
+Here we are sending the component data to the view if the value is changed in the view like in many forms the vlaue has to change that is 2 way binding.
+
+.html
+---------------------------------
+<h1>{{ title }}</h1>
+
+<input [value]= "email" (keyup.enter)="onKeyUp()" />
+
+.ts
+----------------------------------
+
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  email = "me@example.com"; // here we are adding the value when we check the console log we will find that it has me@example.com as we have set the value to me@example.com
+  title = "List of Courses";
+  onKeyUp(email) {
+    console.log(this.email);
+  }  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+The above is on way binding. If we change the data in the input filed then it will not change the email value in the .ts as we is one way binding.
+
+2way binding.
+----------------------------------------------------
+.html
+------------------
+<h1>{{ title }}</h1>
+
+<input [value]= "email" (keyup.enter)="email=$event.target.value; onKeyUp()" />
+
+.ts
+-------------------------
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  email = "me@example.com";
+  title = "List of Courses";
+  onKeyUp(email) {
+    console.log(this.email);
+  }  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+ngModel is a angular built in directive this is used to change the DOM value for 2 way binding.
+
+.html
+----------------------------------
+<h1>{{ title }}</h1>
+
+
+<input [(ngModel)]="email" (keyup.enter)="onKeyUp()" />
+
+
+.ts
+-------------------------
+import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+  email = "me@example.com";
+  title = "List of Courses";
+  onKeyUp(email) {
+    console.log(this.email);
+  }  
+  //imageUrl = "https://images.unsplash.com/photo-1490731678285-2e5640f5a918?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=97a37c4f31a47d1559661df0a69405cb&auto=format&fit=crop&w=634&q=80";
+  ngOnInit() {
+  }
+
+}
+
+We will get an error saying that ngModel is not defined as this directive is used in forms we to import form in to our application we do that by
+
+cntrl+p and app.module
+we have an array import and it 
+
+-- Pipes in Angular ---
+Pipes are used to filter the data in angular. We have 2 types builtin pipes and user defined pipes.
+1. Builtin Pipes
+-------------------------------------------
+<ul>
+  <li>
+    {{"course Title is :  " + course.title | uppercase | }} // to convert it to upper case and then lower cas we can use multiple pipel like in shell
+  </li>
+  <li>
+    {{ course.rating | number:'1.2-3'}} // Here we are using number to reprenst a floating point in which 1 is for 1 digit before "." 2-2 is for 2 min and 2 max after decimal points
+  </li>
+  <li>
+    {{ course.price | currency:'AUD':true:'3.2-2' }} // currency will take 3 arguments, 1 country, 2 is to indicate the currency symbol, and is to show number of digits like '3.2-2' will show 3 digits before decimal and min of 2 and max of 2 after decimal
+  </li>
+  <li>
+    {{ course.students | number }} // for reaable format we will get 34,343 instad of 34343
+  </li>
+  <li>
+    {{ course.releaseDate | date:'mediumDate'}} // here we are using date pipe with mediumDate as parameter. we can get all the details by searching for angualr date pipe.
+  </li>
+</ul>
+
+-- custom Pipes ----------------------
+We can create custom pipes in angular. To do that we need to first create a file in module folder here it is app folder with pipe name.
+
+.html
+-----------------------
+{{ text | summary}} // Here summary is our custom piple
+
+courses.component.ts
+------------------------------
+import { CoursesService } from './../../../../../../../../../Angular/Udemy-Angular-Tutorial/AngularTestingProject/src/app/courses.service';
+import { Component, OnInit } from '@angular/core';
+import { privateEncrypt } from 'crypto';
+
+@Component({
+	selector: 'courses',
+	templateUrl: './courses.component.html',
+	styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+	
+	text = `The server lnxdbcj-dr-551 entered the decommissioning process on 7/9/2018 5:53:51 AM. Shared storage was detected on the host as detailed below. This storage will no longer be in use and can be removed. Please contact the requestor (darpjain) for more details on how to proceed.Storage consumption details can also be found at: https://cisco.service-now.com/cmdb_ci_storage_device_list.do?sysparm_query=computer.name%3Dlnxdbcj-dr-551%5Estorage_type%3Dnetwork&sysparm_first_row=1&sysparm_view=`
+
+}
+
+Next is to create new file summary.pipe.ts in /app folder 
+
+
+summary.pipe.ts
+-----------------------
+import { Pipe, PipeTransform } from '@angular/core'; // we have to import Pipe and PipeTranform from core pipe transform is used to form pipe interfaces.
+
+@Pipe({ // we are implementing pipe decorator
+    name: 'summary'
+})
+
+
+export class SummaryPipe implements PipeTransform { // as we need custom pipe we need to implement PipeTranform.
+    transform(value: string, args?: any) {
+        if (!value) 
+            return null;
+
+        return value.substr(0, 50) + '....';
+    }
+}
+
+course.compnent.ts
+--------------------------------------
+import { CoursesService } from './../../../../../../../../../Angular/Udemy-Angular-Tutorial/AngularTestingProject/src/app/courses.service';
+import { Component, OnInit } from '@angular/core';
+import { privateEncrypt } from 'crypto';
+
+@Component({
+	selector: 'courses',
+	templateUrl: './courses.component.html',
+	styleUrls: ['./courses.component.css']
+})
+export class CoursesComponent implements OnInit {
+	
+	text = `The server lnxdbcj-dr-551 entered the decommissioning process on 7/9/2018 5:53:51 AM. Shared storage was detected on the host as detailed below. This storage will no longer be in use and can be removed. Please contact the requestor (darpjain) for more details on how to proceed.Storage consumption details can also be found at: https://cisco.service-now.com/cmdb_ci_storage_device_list.do?sysparm_query=computer.name%3Dlnxdbcj-dr-551%5Estorage_type%3Dnetwork&sysparm_first_row=1&sysparm_view=`;
+
+}
+
+We have to register it to our module otherwise we will not be able to use it.
+app.module.ts
+----------------------
+import { SummaryPipe } from './summary.pipe'; // Importing custom summary.
+import { FormsModule } from '@angular/forms';
+import { CoursesService } from './../../../../../../../../Angular/Udemy-Angular-Tutorial/AngularTestingProject/src/app/courses.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { CoursesComponent } from './courses/courses.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CoursesComponent,
+    SummaryPipe // adding our custom summary pipe 
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [
+    CoursesService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+-- custom pipes with arguments -------------------------------
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+    name: 'summary'
+})
+
+
+export class SummaryPipe implements PipeTransform {
+    transform(value: string, limit?: number ) { // here we are using limit as name and setting it number 
+        if (!value) 
+            return null;
+        let actualLimit = (limit ) ? limit : 50;
+        return value.substr(0, actualLimit) + '....';
+    }
+}
+
+.html
+------------------
+{{ text | summary:'10'}}
+
+
+----------- Reusable componnets section -----------------------
+
+In order to use the component more useable we need to add properties and event binding. Like any other html element.
+for example if we take button <button [style.backgroundColor] ="red" (clicked)="onClick(). Here we can change style property 
+like on some event like click, mousemove etc..
+In the same way we can add customm properties and event binding to our components as they are used as html elements.
+EG: <courses [isFavorite]="point.isFavorite"></courses>
+
+Here it is very important to see how we are creating input values for our components.
+1. First we have to create a component favourite if you don't have it and register it to our app moudle in declarations.
+app.module.ts
+-----------------------
+import { SummaryPipe } from './summary.pipe';
+import { FormsModule } from '@angular/forms';
+import { CoursesService } from './../../../../../../../../Angular/Udemy-Angular-Tutorial/AngularTestingProject/src/app/courses.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+
+import { AppComponent } from './app.component';
+import { CoursesComponent } from './courses/courses.component';
+import { TitleConversionComponent } from './title-conversion/title-conversion.component';
+import { ConversionPipe } from './conversion.pipe';
+import { FavoriteComponent } from './favorite/favorite.component'; // Favorite compnent added to module.ts
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CoursesComponent,
+    SummaryPipe,
+    TitleConversionComponent,
+    ConversionPipe,
+    FavoriteComponent // our Favorite component
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [
+    CoursesService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+Favorite.component.ts
+----------------------------
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-favorite',
+  templateUrl: './favorite.component.html',
+  styleUrls: ['./favorite.component.css']
+})
+export class FavoriteComponent implements OnInit {
+  @Input () isFavorite: boolean; // Here we are using inbuilt decorator Input to create input for favorite component.
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+Next this is we have to used <favorite> in app.compnent.html.
+app.compnent.html.
+------------------------------------
+<courses></courses>
+<title-conversion></title-conversion>
+<favourite [isFavorite]="post.isFavorite"></favourite> // This is our new favroite component which is using isFavorite as input and post variable which is declared in app.compnent.ts
+
+app.compnent.ts
+----------------------------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+ 
+  post = {              /*We are declaring post variable in our app.component.ts
+	title: 'Title',
+	isFavourite : true
+  }
+}
+
+--- 2nd way of adding input propery to custom component ----------------------------
+favorite.component.ts
+-------------------------------
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'favorite',
+  templateUrl: './favorite.component.html',
+  styleUrls: ['./favorite.component.css']
+  input: ['isFavorite']         //Here we are adding input to our components decorator
+})
+export class FavoriteComponent implements OnInit {
+  @Input () isFavorite: boolean; // Here we are using inbuilt decorator Input to create input for favorite component.
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onClick(){
+    this.isFavorite = !this.isFavorite;
+  }
+
+}
+
+
+---------- Creating alias to input propery ---------------------------
+
+favorite.compnent.ts
+-----------------------------------
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'favorite',
+  templateUrl: './favorite.component.html',
+  styleUrls: ['./favorite.component.css']
+ // input: ['isFavorite']         //Here we are adding input to our components decorator
+})
+export class FavoriteComponent implements OnInit {
+  @Input('is-favorite') isFavorite: boolean; // Here we are providing optional alias is-favorite to input property is-favorite.
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onClick() {
+    this.isFavorite = !this.isFavorite;
+  }
+
+}
+
+app.compnent.html
+-----------------------------
+<courses></courses>
+<title-conversion></title-conversion>
+<favorite [is-favorite]="post.isFavorite"></favorite>
+
+----------------- Adding custom event to our custom component ------------------------------------
+Here we are going to add custom event to our custom component. Like click, mousemove, doubleclick we can create custom events.
+
+app.component.html
+-------------------------------
+<courses></courses>
+<title-conversion></title-conversion>
+<favorite [is-favorite]="post.isFavorite" (changed)="isFavoriteChanged()"></favorite>
+
+app.component.ts
+-------------------------------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+ 
+  post = {
+	  title: 'Title',
+	  isFavorite : true
+  }
+  
+  isFavoriteChanged(){    // This is our custom function that will be trigged when our custom even "changed" is clicked.
+    console.log("Favorite component changed");
+  }
+}
+
+favorite.compnent.ts
+--------------------------------------------
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { EventEmitter } from 'events';
+
+@Component({
+  selector: 'favorite',
+  templateUrl: './favorite.component.html',
+  styleUrls: ['./favorite.component.css']
+ // input: ['isFavorite']         //Here we are adding input to our components decorator
+})
+export class FavoriteComponent implements OnInit {
+  @Input('is-favorite') isFavorite: boolean; // Here we are using inbuilt decorator Input to create input for favorite component.
+  @Output() changed = new EventEmitter(); // we have declared our custom event changed and assigned it to Output decorator and since it is emiiting we created a new eventEmitter instance.
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onClick() {
+    this.isFavorite = !this.isFavorite;
+    this.changed.emit();
+  }
+
+}
+
+favorite.compnent.html
+------------------------------------
+ <a href="#" (click)="onClick()"><i class="fa fa-heart"></i>
+</a>
+
+############# Passing vlaues to the custom events #####################################
+We can pass values to display the data. Here in this example we are sending the isFavorite state to our custom event changed.
+
+app.component.ts
+------------------------------------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+ 
+  post = {
+	  title: 'Title',
+	  isFavorite : true
+  }
+  
+  isFavoriteChanged( isSelected) { // Passing isSelected to our compnent favorite.
+    console.log("Favorite component changed: ", isSelected); // here we are passing the isSelected
+  }
+}
+
+favorite.compnent.ts
+----------------------------------------
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { EventEmitter } from 'events';
+
+@Component({
+  selector: 'favorite',
+  templateUrl: './favorite.component.html',
+  styleUrls: ['./favorite.component.css']
+ // input: ['isFavorite']         //Here we are adding input to our components decorator
+})
+export class FavoriteComponent implements OnInit {
+  @Input('is-favorite') isFavorite: boolean; // Here we are using inbuilt decorator Input to create input for favorite component.
+  @Output() changed = new EventEmitter();
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onClick() {
+    console.log("You have clicked my heart");
+    this.isFavorite = !this.isFavorite;
+    this.changed.emit(this.isFavorite);
+  }
+
+}
+
+app.compnent.html
+--------------------------------------------
+<courses></courses>
+<title-conversion></title-conversion>
+<favorite [is-favorite]="post.isFavorite" (changed)="isFavoriteChanged($event)"></favorite>
+
