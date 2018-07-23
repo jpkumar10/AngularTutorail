@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-conversion',
+  selector: 'conversion',
   templateUrl: './conversion.component.html',
   styleUrls: ['./conversion.component.css']
 })
 export class ConversionComponent implements OnInit {
-
+  title: string;
   constructor() { }
 
   ngOnInit() {
+  }
+  onKeyUP() {
+    console.log(this.title);
   }
 
 }

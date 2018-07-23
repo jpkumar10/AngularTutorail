@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses/courses.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { ConversionComponent } from './conversion/conversion.component';
+import { ConvertPipe } from './convert.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent,
     FavoriteComponent,
-    ConversionComponent
+    ConversionComponent,
+    ConvertPipe
   ],
   imports: [
     BrowserModule,
