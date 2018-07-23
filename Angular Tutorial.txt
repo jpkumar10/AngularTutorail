@@ -1067,3 +1067,62 @@ app.compnent.html
 <favorite [is-favorite]="post.isFavorite" (changed)="isFavoriteChanged($event)"></favorite>
 
 %%%%%%%%%%%% My TEST %%%%%%%%%%%%%%%
+
+####### Title case conversion Example #############################
+conversion.pipe.ts
+--------------------------------------------------
+import { Pipe, PipeTransform } from '@angular/core';
+
+
+@Pipe({
+  name: 'convert'
+})
+export class ConvertPipe implements PipeTransform {
+
+  transform( value: string): any {
+    if (!value) return null;
+    let prepositions = [
+		'of',
+		'the'
+	];
+    let words = value.split(' ');
+	for ( var i = 0; i < words.length ; i++) {
+		if (i > 0 &&  prepositions.includes(words[i] )){
+			 words[i].toLocaleLowerCase();
+		}
+		else {
+			words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1).toLowerCase();
+		}
+	}
+	
+	return words.join(' ');
+	}
+		
+	}
+
+  convention.component.html
+  ------------------------------------------
+  <input [(ngModel)]="title" type="text" /> <br />
+{{ title | convert }}
+
+
+conversion.component.ts
+------------------------------------
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'conversion',
+  templateUrl: './conversion.component.html',
+  styleUrls: ['./conversion.component.css']
+})
+export class ConversionComponent implements OnInit {
+  title: string;
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onKeyUP() {
+    console.log(this.title);
+  }
+
+}
